@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/overlay-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Portfolio</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <section class="blog-wrapper sect-pt4" id="blog">
+      {%for project in projects%}
+        <div class="col-md-12">
+          <div class="post-box">
+            <div class="post-thumb">
+              <img src="{{project.image1.url}}" class="img-thumbnail" alt="">
+            </div>
+            <div class="post-meta">
+              <h1 class="article-title"><a href="{{project.get_absolute_url}}">{{project.title}}</a></h1>
+              <ul>
+                <li>
+                  <span class="bi bi-person"></span>
+                  <a href="details/{{project.id}}">Read more</a>
+                </li>
+                <li>
+                  <span class="bi bi-tag"></span>
+                  <a href="#">{{project.category}}</a>
+                </li>
+                <li>
+                  <span class="bi bi-chat-left-text"></span>
+                  <a href="#">{{project.project_date}}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="article-content">
+              <p>
+                {{project.details}}
+              </p>
+            </div>
+        </div>
+        {%endfor%}
+    </section>
+
+{% endblock %}

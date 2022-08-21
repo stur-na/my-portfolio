@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/overlay-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Blog</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ======= Blog Single Section ======= -->
+
+    <section class="blog-wrapper sect-pt4" id="blog">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {% for post in posts %}
+            <div class="post-box">
+              <div class="post-thumb">
+                <img src="{{ post.thumbnail.url }}" class="img-fluid" alt="">
+              </div>
+              <div class="post-meta">
+                <h1 class="article-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+                <ul>
+                  <li>
+                    <span class="bi bi-calendar3"></span>
+                    <span>{{ post.timestamp }}</span>
+                  </li>
+                  <li>
+                    <span class="bi bi-chat-left-text"></span>
+                    <span>{{ post.get_readtime }}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="article-content">
+                <p>
+                  {{ post.overview }}
+                </p>
+              </div>
+            </div>
+            {% endfor%}
+          </div>
+
+          <!--sidebar(right)-->
+          <div class="col-md-4">
+            <div class="widget-sidebar sidebar-search">
+              <h5 class="sidebar-title">Search</h5>
+              <div class="sidebar-content">
+                <form>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary btn-search" type="button">
+                        <span class="bi bi-search"></span>
+                      </button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="widget-sidebar">
+              <h5 class="sidebar-title">Recent Post</h5>
+              <div class="sidebar-content">
+                {% for recentpost in recentposts%}
+                {%if recentpost.id != post.id%}
+                <ul class="list-sidebar">
+                  <li>
+                    <a href="{{recentpost.get_absolute_url}}#prev">{{recentpost.title}}</a>
+                {%endif%}
+                  </li>
+                </ul>
+                {%endfor%}
+              </div>
+            </div>
+            <div class="widget-sidebar">
+              <h5 class="sidebar-title">Archives</h5>
+              <div class="sidebar-content">
+                <ul class="list-sidebar">
+                  <li>
+                    <a href="#">September, 2017.</a>
+                  </li>
+                  <li>
+                    <a href="#">April, 2017.</a>
+                  </li>
+                  <li>
+                    <a href="#">Nam quo autem exercitationem.</a>
+                  </li>
+                  <li>
+                    <a href="#">Atque placeat maiores nam quo autem</a>
+                  </li>
+                  <li>
+                    <a href="#">Nam quo autem exercitationem.</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="widget-sidebar widget-tags">
+              <h5 class="sidebar-title">Tags</h5>
+              <div class="sidebar-content">
+                <ul>
+                  {%for tag in tags%}
+                  <li>
+                    <a href="#">{{tag.name}}.</a>
+                  </li>
+                  {%endfor%}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Blog Single Section -->
+
+  </main>
+  <!-- End #main -->
+
+{% endblock %}
